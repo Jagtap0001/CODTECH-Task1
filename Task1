@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    char nullptr;
+    char questions[4][75] = {
+        "Where was mount rushmore carved?",
+        "What is 11 + 2?",
+        "What language is Windows written in?",
+        "Is killing people illegal?"
+    };
+    
+    char options[4][75] = {
+        "A. The moon\nB. Earth\nC. Pluto (IT'S A REAL PLANET!)",
+        "A. 23\nB. 12\nC. The age of consent in Japan",
+        "A. C standard\nB. C#\nC. Python",
+        "A. Yes\nB. No\nC. Depends on where you live"
+    };
+    
+    char correctAnswers[4] = {'B', 'C', 'A', 'C'};
+    char userInput = '0';
+    int questionAmount = sizeof(questions) / sizeof(questions[0]);
+    int incrementPerQuestion = 100 / questionAmount;
+    int score = 0;
+
+    for (int i = 0; i < questionAmount; i++) {
+        printf("\nQuestion #%d: %s\n%s\n", i + 1, questions[i], options[i]);
+        scanf(" %c", &userInput);  // Added a space before %c to clear the newline character from the buffer
+        userInput = toupper(userInput);  // Converts the answer to uppercase
+
+        if (correctAnswers[i] == userInput) {
+            score += incrementPerQuestion;
+        }
+    }
+
+    printf("You got %d%% of the questions correct.\n", score);  // Fixed the output to print score correctly
+
+    if (score == 100) {
+        printf("\nCONGRATULATIONS!\n");
+    }
+
+    return 0;
+}
